@@ -1,145 +1,203 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Portfolio</title>
+<style>
+:root {
+  --bg: #22272e;
+  --bg-subtle: #2d333b;
+  --bg-header: #1c2128;
+  --border: #444c56;
+  --fg: #adbac7;
+  --fg-strong: #cdd9e5;
+  --fg-muted: #768390;
+  --accent: #539bf5;
+  --green: #57ab5a;
+  --btn: #347d39;
+  --btn-hover: #46954a;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans Thai", "Sarabun", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
 
-    <title>My Portfolio</title>
+.topbar {
+  background: var(--bg-header);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 24px;
+  color: var(--fg-strong);
+  font-weight: 600;
+}
+.wrap { max-width: 960px; margin: 0 auto; padding: 32px 24px; }
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            background: #f2f4f7;
-            color: #333;
-        }
+.profile {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 28px;
+}
+.avatar {
+  flex: none;
+  width: 112px; height: 112px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg-subtle);
+  display: grid; place-items: center;
+  font-size: 48px;
+}
+.profile h1 { margin: 0; font-size: 28px; color: var(--fg-strong); line-height: 1.25; }
+.profile .user { color: var(--fg-muted); font-size: 18px; margin: 0 0 8px; }
+.profile p { margin: 0; }
 
-        header {
-            background: #222;
-            color: white;
-            text-align: center;
-            padding: 60px 20px;
-        }
+h2 { font-size: 18px; font-weight: 600; color: var(--fg-strong); margin: 0 0 14px; }
 
-        header h1 {
-            margin-bottom: 10px;
-        }
+.box {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 16px 20px;
+  margin-bottom: 32px;
+}
+.info { list-style: none; margin: 0 0 12px; padding: 0; }
+.info li { display: flex; gap: 12px; padding: 4px 0; }
+.info .k { width: 110px; flex: none; color: var(--fg-muted); }
+.box p { margin: 0; color: var(--fg); }
 
-        .container {
-            max-width: 900px;
-            margin: auto;
-            padding: 30px 20px;
-        }
+.grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.repo {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+.repo-head { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.repo-head a { font-weight: 600; word-break: break-word; }
+.badge {
+  margin-left: auto;
+  font-size: 12px;
+  border: 1px solid var(--border);
+  color: var(--fg-muted);
+  border-radius: 2em;
+  padding: 0 8px;
+  line-height: 20px;
+}
+.repo p { margin: 0 0 14px; color: var(--fg-muted); font-size: 14px; flex: 1; }
+.repo-foot { display: flex; align-items: center; gap: 16px; font-size: 13px; color: var(--fg-muted); }
+.dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; margin-right: 6px; vertical-align: -1px; }
+.btn {
+  margin-left: auto;
+  background: var(--btn);
+  color: #fff;
+  border: 1px solid rgba(205,217,229,0.1);
+  border-radius: 6px;
+  padding: 4px 14px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.btn:hover { background: var(--btn-hover); text-decoration: none; }
 
-        .about,
-        .work {
-            background: white;
-            padding: 25px;
-            margin-bottom: 20px;
-            border-radius: 15px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-        }
+footer {
+  border-top: 1px solid var(--border);
+  text-align: center;
+  padding: 24px;
+  color: var(--fg-muted);
+  font-size: 14px;
+}
 
-        .work h3 {
-            margin-top: 0;
-        }
-
-        .button {
-            display: inline-block;
-            background: #007bff;
-            color: white;
-            text-decoration: none;
-            padding: 10px 18px;
-            border-radius: 8px;
-        }
-
-        .button:hover {
-            background: #0056b3;
-        }
-
-        footer {
-            text-align: center;
-            padding: 30px;
-            color: #777;
-        }
-    </style>
+@media (max-width: 640px) {
+  .profile { flex-direction: column; text-align: center; }
+  .grid { grid-template-columns: 1fr; }
+  .info li { flex-direction: column; gap: 0; }
+}
+</style>
 </head>
-
 <body>
 
-<header>
-    <h1>My Portfolio</h1>
-    <p>เว็บไซต์รวบรวมผลงานของฉัน</p>
-</header>
+<div class="topbar">📁 My Portfolio</div>
 
-<div class="container">
+<main class="wrap">
 
-    <div class="about">
-        <h2>👤 เกี่ยวกับฉัน</h2>
-
-        <p>ชื่อ: ใส่ชื่อของคุณ</p>
-        <p>รหัสนักศึกษา: ใส่รหัสของคุณ</p>
-        <p>สาขา: ใส่สาขาของคุณ</p>
-
-        <p>
-            เว็บไซต์นี้จัดทำขึ้นเพื่อรวบรวมผลงาน
-            และใช้สำหรับส่งให้อาจารย์ตรวจสอบ
-        </p>
+  <section class="profile">
+    <div class="avatar" aria-hidden="true">👤</div>
+    <div>
+      <h1>ใส่ชื่อของคุณ</h1>
+      <p class="user">your-github-username</p>
+      <p>เว็บไซต์รวบรวมผลงานของฉัน</p>
     </div>
+  </section>
 
+  <h2>เกี่ยวกับฉัน</h2>
+  <section class="box">
+    <ul class="info">
+      <li><span class="k">ชื่อ</span><span>ใส่ชื่อของคุณ</span></li>
+      <li><span class="k">รหัสนักศึกษา</span><span>ใส่รหัสของคุณ</span></li>
+      <li><span class="k">สาขา</span><span>ใส่สาขาของคุณ</span></li>
+    </ul>
+    <p>เว็บไซต์นี้จัดทำขึ้นเพื่อรวบรวมผลงาน และใช้สำหรับส่งให้อาจารย์ตรวจสอบ</p>
+  </section>
 
-    <h2>📚 ผลงานของฉัน</h2>
+  <h2>ผลงานของฉัน</h2>
+  <section class="grid">
 
+    <article class="repo">
+      <div class="repo-head">
+        <span aria-hidden="true">📘</span>
+        <a href="ใส่ลิงก์งานที่นี่" target="_blank" rel="noopener">งานที่ 1 - เว็บไซต์แนะนำตัว</a>
+        <span class="badge">Public</span>
+      </div>
+      <p>เว็บไซต์แนะนำตัวที่สร้างด้วย HTML และ CSS</p>
+      <div class="repo-foot">
+        <span><span class="dot" style="background:#e34c26"></span>HTML</span>
+        <span><span class="dot" style="background:#9b72cf"></span>CSS</span>
+        <a class="btn" href="ใส่ลิงก์งานที่นี่" target="_blank" rel="noopener">ดูผลงาน</a>
+      </div>
+    </article>
 
-    <div class="work">
-        <h3>💻 งานที่ 1 - เว็บไซต์แนะนำตัว</h3>
+    <article class="repo">
+      <div class="repo-head">
+        <span aria-hidden="true">📘</span>
+        <a href="ใส่ลิงก์งานที่นี่" target="_blank" rel="noopener">งานที่ 2 - เว็บไซต์ร้านค้า</a>
+        <span class="badge">Public</span>
+      </div>
+      <p>เว็บไซต์จำลองร้านค้าสำหรับวิชาเว็บไซต์</p>
+      <div class="repo-foot">
+        <span><span class="dot" style="background:#e34c26"></span>HTML</span>
+        <span><span class="dot" style="background:#9b72cf"></span>CSS</span>
+        <a class="btn" href="ใส่ลิงก์งานที่นี่" target="_blank" rel="noopener">ดูผลงาน</a>
+      </div>
+    </article>
 
-        <p>
-            เว็บไซต์แนะนำตัวที่สร้างด้วย HTML และ CSS
-        </p>
+    <article class="repo">
+      <div class="repo-head">
+        <span aria-hidden="true">📘</span>
+        <a href="ใส่ลิงก์งานที่นี่" target="_blank" rel="noopener">งานที่ 3 - โปรเจกต์ของฉัน</a>
+        <span class="badge">Public</span>
+      </div>
+      <p>รายละเอียดเกี่ยวกับผลงานชิ้นนี้</p>
+      <div class="repo-foot">
+        <span><span class="dot" style="background:#f1e05a"></span>JavaScript</span>
+        <a class="btn" href="ใส่ลิงก์งานที่นี่" target="_blank" rel="noopener">ดูผลงาน</a>
+      </div>
+    </article>
 
-        <a class="button"
-           href="ใส่ลิงก์งานที่นี่"
-           target="_blank">
-            ดูผลงาน
-        </a>
-    </div>
+  </section>
+</main>
 
-
-    <div class="work">
-        <h3>💻 งานที่ 2 - เว็บไซต์ร้านค้า</h3>
-
-        <p>
-            เว็บไซต์จำลองร้านค้าสำหรับวิชาเว็บไซต์
-        </p>
-
-        <a class="button"
-           href="ใส่ลิงก์งานที่นี่"
-           target="_blank">
-            ดูผลงาน
-        </a>
-    </div>
-
-
-    <div class="work">
-        <h3>💻 งานที่ 3 - โปรเจกต์ของฉัน</h3>
-
-        <p>
-            รายละเอียดเกี่ยวกับผลงานชิ้นนี้
-        </p>
-
-        <a class="button"
-           href="ใส่ลิงก์งานที่นี่"
-           target="_blank">
-            ดูผลงาน
-        </a>
-    </div>
-
-</div>
-
-<footer>
-    © 2026 My Portfolio
-</footer>
+<footer>© 2026 My Portfolio</footer>
 
 </body>
 </html>
